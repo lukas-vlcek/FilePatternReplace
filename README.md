@@ -1,4 +1,4 @@
 FilePatternReplace
 ==================
 
-TBD
+A Groovy GPars experiment.
