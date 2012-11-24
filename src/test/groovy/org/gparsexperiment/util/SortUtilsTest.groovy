@@ -15,7 +15,10 @@ class SortUtilsTest extends GroovyTestCase {
 
         assertEquals("We have 12 testing files", 12, files.length)
 
-        //files.each { System.out.println (it.length() + " > " + it) }
+        def sortedFilesSize = []
+        files.each { sortedFilesSize.add(it.length()) }
+
+        assert [4, 3, 3, 2, 2, 1, 0, 0, 0, 0, 0, 0] == sortedFilesSize
 
     }
 }
