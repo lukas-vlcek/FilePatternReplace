@@ -5,7 +5,7 @@ import static groovyx.gpars.GParsPool.runForkJoin
 import groovy.util.logging.Slf4j
 
 /**
- * TBD
+ * Utilities related to the file IO.
  */
 @Slf4j
 class IOUtils {
@@ -13,9 +13,11 @@ class IOUtils {
     /**
      * Returns list of all files found in given folder (including files from sub-folders).
      * Internally, it is using Fork/Join to split the work among threads.
-     * @param dir
-     * @param threads number og threads
-     * @return
+     *
+     * @param dir where to start collection files
+     * @param threads number of threads
+     *
+     * @return all files found under the dir (recursively)
      */
     static File[] collectFiles(String dir, int threads) {
 
@@ -47,11 +49,15 @@ class IOUtils {
     }
 
     /**
+     * For each file that contains pattern a new file will be created with modified content
+     * (all patterns replaced with the value) and stored next to the original file. Name
+     * of the new file is the same as original file plus the extension.
      *
-     * @param files
-     * @param threads
-     * @param pattern
-     * @param value
+     * @param files to process
+     * @param threads how many parallel threads are used
+     * @param pattern regexp patter to find in the files
+     * @param value to replace pattern
+     * @param extension of modified file
      */
     static public void replace(File[] files, int threads, String pattern, String value, String extension) {
 
@@ -62,22 +68,22 @@ class IOUtils {
             files.eachParallel { File file ->
                 def fileContent = file.text
                 def modifiedContent = RegexUtils.replace(fileContent, ~pattern, value)
-                try {
-                    log.trace ('replacing content in file {}', file)
-                    def newFile = new File(file.absolutePath + "." + extension)
-                    if (newFile.createNewFile()) {
-                        newFile.setText(modifiedContent, 'UTF-8')
-                        log.trace ('created a new file {}', newFile)
+                if (fileContent != modifiedContent) {
+                    try {
+                        def newFile = new File(file.absolutePath + "." + extension)
+                        if (newFile.createNewFile()) {
+                            newFile.setText(modifiedContent, 'UTF-8')
+                            log.trace ('created a new file {}', newFile)
+                        }
+                        else {
+                            // not created!
+                            log.warn ('unable to create a new file {}', newFile)
+                        }
+                    } catch (Exception e) {
+                        log.warn ('Something went wrong when processing file {}, {}', file, e)
                     }
-                    else {
-                        // not created!
-                        log.warn ('unable to create a new file {}', newFile)
-                    }
-                } catch (Exception e) {
-                    log.warn ('Something went wrong when processing file {}, {}', file, e)
                 }
             }
-
         }
     }
 

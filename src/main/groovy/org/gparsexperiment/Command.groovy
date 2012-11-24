@@ -7,13 +7,14 @@ import groovy.util.logging.Slf4j
 
 /**
  * Command called from command line.
+ * For more info about what it does please read https://github.com/lukas-vlcek/FilePatternReplace
  */
 @Slf4j
 class Command {
 
     static void main(String[] args) {
 
-        log.debug 'Starting'
+        log.info 'Starting'
 
         if (args.length < 3) {
 
@@ -35,24 +36,33 @@ class Command {
 
         } else {
 
-            log.debug ('Arguments: {}', args)
+            log.info ('Arguments: {}', args)
 
+            String pattern = args[1]
+            String replace = args[2]
             int threads = ARGSUtils.getThreads(args, "4")
             String extension = ARGSUtils.getExtension(args, "mod")
+
+            log.info ('Threads: {}', threads)
+            log.info ('File extension: {}', extension)
 
             String dir = args[0]
 
             File[] files = IOUtils.collectFiles(dir, threads)
+
+            log.info ('Found {} files to process', files.length)
 
             if (files.length > 0) {
 
                 // sort descending by size
                 files = SortUtils.mergeSort(files, threads)
 
-                //IOUtils.replace(files, threads, "x", "x", extension)
+                log.info ('All occurences of \'{}\' in those files will be replace by \'{}\'', pattern, replace)
+                IOUtils.replace(files, threads, pattern, replace, extension)
 
             }
-        }
 
+            log.info 'Done!'
+        }
     }
 }
