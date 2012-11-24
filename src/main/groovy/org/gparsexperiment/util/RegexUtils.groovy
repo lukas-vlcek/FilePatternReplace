@@ -3,7 +3,7 @@ package org.gparsexperiment.util
 import java.util.regex.Pattern
 
 /**
- * Simple utility for regexp replacing.
+ * Simple utility for regex replacing.
  */
 class RegexUtils {
 

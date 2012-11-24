@@ -55,7 +55,7 @@ class IOUtils {
      *
      * @param files to process
      * @param threads how many parallel threads are used
-     * @param pattern regexp patter to find in the files
+     * @param pattern regex patter to find in the files
      * @param value to replace pattern
      * @param extension of modified file
      */
