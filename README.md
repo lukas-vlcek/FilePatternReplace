@@ -40,7 +40,8 @@ By default logging configuration can be found in `target\classes\log4j.propertie
 For example:
 
 ```
-java -Dlog4j.configuration=/path/to/log4j.properties -jar FilePatternReplace.jar folder pattern value [threads] [extension]
+java -Dlog4j.configuration=/path/to/log4j.properties \
+     -jar FilePatternReplace.jar folder pattern value [threads] [extension]
 ```
 
 ### Where does it store modified files?
