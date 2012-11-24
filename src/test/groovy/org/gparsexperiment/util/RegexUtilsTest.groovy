@@ -14,4 +14,10 @@ class RegexUtilsTest extends GroovyTestCase {
         def replacedContent = "The dummy brown dummy jumps over the lazy dummy"
         assertEquals("Should replace all", replacedContent, RegexUtils.replace(originalContent, ~"quick|fox|dog", "dummy"))
     }
+
+    void testShouldFindThePattern() {
+        def content = "It should find the pattern here"
+        def pattern = "should|pattern"
+        assertTrue("Should return true", RegexUtils.find(content, ~pattern))
+    }
 }

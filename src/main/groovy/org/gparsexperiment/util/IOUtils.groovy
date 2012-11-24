@@ -2,6 +2,7 @@ package org.gparsexperiment.util
 
 import static groovyx.gpars.GParsPool.withPool
 import static groovyx.gpars.GParsPool.runForkJoin
+import java.util.regex.Pattern
 import groovy.util.logging.Slf4j
 
 /**
@@ -63,12 +64,17 @@ class IOUtils {
 
         log.debug ('starting replacing pattern in {} files using {} threads', files.length, threads)
 
+        Pattern _pattern = ~pattern;
+
         withPool(threads) {
 
             files.eachParallel { File file ->
-                def fileContent = file.text
-                def modifiedContent = RegexUtils.replace(fileContent, ~pattern, value)
-                if (fileContent != modifiedContent) {
+
+                String fileContent = file.text
+
+                if ( RegexUtils.find(fileContent, _pattern) ) {
+
+                    def modifiedContent = RegexUtils.replace(fileContent, _pattern, value)
                     try {
                         def newFile = new File(file.absolutePath + "." + extension)
                         if (newFile.createNewFile()) {
