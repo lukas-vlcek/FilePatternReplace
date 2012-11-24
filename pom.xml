@@ -4,7 +4,7 @@
     <groupId>org.gparstest</groupId>
     <artifactId>FilePatternReplace</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>FilePatternReplace - a Groovy GPars experiment</name>
 
     <repositories>
