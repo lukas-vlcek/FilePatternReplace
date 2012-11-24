@@ -35,7 +35,7 @@ java -jar FilePatternReplace.jar folder pattern value [threads] [extension]
 ### How do I learn what it does?
 
 Configure logging!
-By default logging configuration can be found in `target\classes\log4j.properties`. You can either change this file or provide your own configuration file using `-Dlog4j.configuration` option.
+By default logging configuration can be found in `src/main/resources/log4j.properties`. You can either change this file and rebuild it (`mvm clean package`) or provide your own configuration file using `-Dlog4j.configuration` option on command line.
 
 For example:
 
