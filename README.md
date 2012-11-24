@@ -24,7 +24,7 @@ More specifically, you can specify:
 
 ### How to use it?
 
-After you have built it navigate to `target` folder. There you will find file called `FilePatternReplace.jar` and folders `classes` and `lib`; everything else found in `target` folder is not important (and could be deleted).
+After you have [built it](#how-to-build-it) navigate to `target` folder. There you will find file called `FilePatternReplace.jar` and folders `classes` and `lib`; everything else found in `target` folder is not important (and could be deleted).
 
 To make use of the FilePatternReplace just type:
 
@@ -59,7 +59,7 @@ Then the file with replaced patterns will be located in
 /Users/lukas/tmp/file.txt.mod
 ```
 
-## I found a bug, what shall I do?
+### I found a bug, what shall I do?
 
 Feel free to open a [new ticket](https://github.com/lukas-vlcek/FilePatternReplace/issues), however; this was implemented as an experiment so I do not promis that I will pay attention to any issues. But if you prepare a [pull request](https://github.com/lukas-vlcek/FilePatternReplace/pulls) then I will definitely have a look at it :-)
 
