@@ -21,9 +21,9 @@ class IOUtilsReplaceTest extends GroovyTestCase {
         File[] files = IOUtils.collectFiles(dir, 3);
         assertEquals("We have 3 testing files", 3, files.length)
 
-        IOUtils.replace(files, 3, "x", "x", "mod");
+        IOUtils.replace(files, 3, "2", "X", "mod");
         files = IOUtils.collectFiles(dir, 3);
-        assertEquals("Now we have 6 testing files", 6, files.length)
+        assertEquals("Now we have 5 testing files", 5, files.length)
     }
 
 }
