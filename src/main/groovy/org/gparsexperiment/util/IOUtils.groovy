@@ -2,10 +2,12 @@ package org.gparsexperiment.util
 
 import static groovyx.gpars.GParsPool.withPool
 import static groovyx.gpars.GParsPool.runForkJoin
+import groovy.util.logging.Slf4j
 
 /**
  * TBD
  */
+@Slf4j
 class IOUtils {
 
     /**
@@ -16,6 +18,8 @@ class IOUtils {
      * @return
      */
     static File[] collectFiles(String dir, int threads) {
+
+        log.debug ('starting collecting info about files in {} using {} threads', dir, threads)
 
         assert threads > 0
 
@@ -28,6 +32,7 @@ class IOUtils {
                 file.eachFile {
 
                     if (it.isDirectory()) {
+                        log.trace ('starting a fork for {}', it)
                         forkOffChild(it)
                     } else {
                         files << it
@@ -50,21 +55,26 @@ class IOUtils {
      */
     static public void replace(File[] files, int threads, String pattern, String value, String extension) {
 
+        log.debug ('starting replacing pattern in {} files using {} threads', files.length, threads)
+
         withPool(threads) {
 
             files.eachParallel { File file ->
                 def fileContent = file.text
                 def modifiedContent = RegexUtils.replace(fileContent, ~pattern, value)
                 try {
+                    log.trace ('replacing content in file {}', file)
                     def newFile = new File(file.absolutePath + "." + extension)
                     if (newFile.createNewFile()) {
                         newFile.setText(modifiedContent, 'UTF-8')
+                        log.trace ('created a new file {}', newFile)
                     }
                     else {
                         // not created!
+                        log.warn ('unable to create a new file {}', newFile)
                     }
                 } catch (Exception e) {
-                    System.out.println(e)
+                    log.warn ('Something went wrong when processing file {}, {}', file, e)
                 }
             }
 

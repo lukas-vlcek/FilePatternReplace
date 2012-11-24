@@ -1,14 +1,14 @@
 package org.gparsexperiment.util
 
-
 import static groovyx.gpars.GParsPool.runForkJoin
 import static groovyx.gpars.GParsPool.withPool
+import groovy.util.logging.Slf4j
 
 /**
  * Based on MergeSort example from http://www.gpars.org/guide/guide/3.%20Data%20Parallelism.html
  */
+@Slf4j
 class SortUtils {
-
 
     /**
      * Splits a list of Files in half
@@ -46,6 +46,8 @@ class SortUtils {
      * @return
      */
     public static File[] mergeSort(File[] files, int threads) {
+
+        log.debug ('starting mergeSort on {} files using {} threads', files.length, threads)
 
         assert threads > 0
 

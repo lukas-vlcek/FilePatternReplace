@@ -3,15 +3,21 @@ package org.gparsexperiment
 import org.gparsexperiment.util.IOUtils
 import org.gparsexperiment.util.ARGSUtils
 import org.gparsexperiment.util.SortUtils
+import groovy.util.logging.Slf4j
 
 /**
  * Command called from command line.
  */
+@Slf4j
 class Command {
 
     static void main(String[] args) {
 
+        log.debug 'Starting'
+
         if (args.length < 3) {
+
+            log.fatal ('Invalid arguments found {}', args)
 
             System.out.println("usage: java -jar FilePatternReplace.jar dir pattern replace [threads] [extension]")
             System.out.println("dir       - A path to a directory containing files")
@@ -23,9 +29,13 @@ class Command {
             System.out.println()
             System.out.println("Example: java -jar FilePatternReplace.jar /Places/WhiteHouse [O|o]bama Romney")
 
+            log.error 'Exit'
+
             return;
 
         } else {
+
+            log.debug ('Arguments: {}', args)
 
             int threads = ARGSUtils.getThreads(args, "4")
             String extension = ARGSUtils.getExtension(args, "mod")
