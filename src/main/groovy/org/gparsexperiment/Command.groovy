@@ -20,10 +20,10 @@ class Command {
 
             log.fatal ('Invalid arguments found {}', args)
 
-            System.out.println("usage: java -jar FilePatternReplace.jar dir pattern replace [threads] [extension]")
-            System.out.println("dir       - A path to a directory containing files")
+            System.out.println("usage: java -jar FilePatternReplace.jar folder pattern value [threads] [extension]")
+            System.out.println("folder    - A path to a directory containing files")
             System.out.println("pattern   - regex pattern to find in files")
-            System.out.println("replace   - if pattern is found then it is replaced by this value")
+            System.out.println("value     - if pattern is found then it is replaced by this value")
             System.out.println("threads   - optional argument, number of threads used. Defaults to 4.")
             System.out.println("extension - optional argument, extension of modified file. Defaults to 'mod'")
 
