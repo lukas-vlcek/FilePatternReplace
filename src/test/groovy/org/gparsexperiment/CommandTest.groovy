@@ -20,7 +20,7 @@ class CommandTest extends GroovyTestCase {
      * Replaces all occurrences of string '2' with 'X' in files found under ${dir} folder recursively.
      * Modified files will be stored using '.test' extension.
      */
-    void testMain() {
+    void testShouldExecuteCommandMainMethod() {
 
         def args = [ dir, "2", "X", 1, "test" ] as String[]
 
