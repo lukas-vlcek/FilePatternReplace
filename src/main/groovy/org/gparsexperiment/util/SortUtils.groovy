@@ -5,6 +5,7 @@ import static groovyx.gpars.GParsPool.withPool
 import groovy.util.logging.Slf4j
 
 /**
+ * This utility class provides one possible implementation of sorting files by their size.
  * Based on MergeSort example from http://www.gpars.org/guide/guide/3.%20Data%20Parallelism.html
  */
 @Slf4j
@@ -41,9 +42,11 @@ class SortUtils {
 
     /**
      * Sort files in descending order by size.
-     * @param files
-     * @param threads
-     * @return
+     *
+     * @param files to sort
+     * @param threads how many threads to use in parallel for sorting
+     *
+     * @return files sorted by size in descending order
      */
     public static File[] mergeSort(File[] files, int threads) {
 

@@ -3,7 +3,7 @@ package org.gparsexperiment.util
 import groovy.util.logging.Slf4j
 
 /**
- * TBD
+ * Utilities for parsing value from arguments.
  */
 @Slf4j
 class ARGSUtils {
@@ -14,7 +14,8 @@ class ARGSUtils {
      *
      * @param args
      * @param defValue
-     * @return
+     *
+     * @return parsed value or the default one
      */
     static int getThreads(String[] args, String defValue) {
         log.debug ('parsing threads from arguments {}', args)
@@ -27,7 +28,8 @@ class ARGSUtils {
      *
      * @param args
      * @param defValue
-     * @return
+     *
+     * @return parsed value or the default one
      */
     static String getExtension(String[] args, String defValue) {
         log.debug ('parsing extension from arguments {}', args)

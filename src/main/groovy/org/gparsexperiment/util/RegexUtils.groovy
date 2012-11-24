@@ -3,16 +3,18 @@ package org.gparsexperiment.util
 import java.util.regex.Pattern
 
 /**
- * TBD
+ * Simple utility for regexp replacing.
  */
 class RegexUtils {
 
     /**
+     * Replaces all occurrences of pattern with value in given content.
      *
      * @param content
      * @param pattern
      * @param value
-     * @return
+     *
+     * @return content
      */
     static public String replace(String content, Pattern pattern, String value) {
 
